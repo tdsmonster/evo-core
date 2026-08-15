@@ -1,45 +1,45 @@
 # ROADMAP
 
-## 当前版本: v2.0（2026-08）—— 模块化架构
+## Current Version: v1.0 — Modular Architecture Release
 
-### 已发布（经过真实端侧实战验证）
-- ✅ 底层核心框架 `docs/evo-core-framework.md`（6 大理论 + 四维约束矩阵）
-- ✅ 理论模块库 `theory-modules/`（M1-M6，每模块 = 论文依据 + AI 可解析核心 + 依赖）
-- ✅ EVO-Lite 蓝图 `docs/evo-tier-a-lite.md`（3 档算力推荐配置表）
-- ✅ 3 个参考实现模板 `templates/`
+### Released (Empirically Validated in Edge/Real-world Environments)
+- ✅ Core Framework `docs/evo-core-framework.md` (6 Core Theories + 4D Constraint Matrix)
+- ✅ Theory Modules Library `theory-modules/` (M1-M6, each module = Paper Basis + AI-Parseable Core + Dependencies)
+- ✅ EVO-Lite Blueprint `docs/evo-tier-a-lite.md` (3-Tier compute recommended presets)
+- ✅ 3 Reference Implementation Templates `templates/`
 
-### 未发布（理论推演，未经实战验证）
-- ⏳ **EVO-Pro**（专业开发者推荐配置）：生产级可观测/CI 回归/参数内化（M7）——**理论阶段**
-- ⏳ **EVO-Team**（工作室推荐配置）：多用户经验共享/权限隔离（M8）——**理论阶段**
-- ⏳ **M7 参数内化模块**（SKILL0/Skill1）：需 RL 训练，未实战
-- ⏳ **M8 多用户生态模块**（SkillClaw）：需多用户场景，未实战
+### Unreleased (Theoretical Deduction, Pending Empirical Validation)
+- ⏳ **EVO-Pro** (Professional Developer Preset): Production-grade observability / CI regression / Parametric Internalization (M7) — **Theory Stage**
+- ⏳ **EVO-Team** (Studio Preset): Multi-user experience sharing / Access isolation (M8) — **Theory Stage**
+- ⏳ **M7 Parametric Internalization Module** (SKILL0/Skill1): Requires RL training, unvalidated in practice.
+- ⏳ **M8 Multi-User Ecosystem Module** (SkillClaw): Requires multi-user scenarios, unvalidated in practice.
 
-> 设计原则：**只发布实战验证过的内容**。未经验证的理论不入库，仅在路线图标注，避免误导使用者。
-
----
-
-## 未来方向
-
-### 短期
-- [ ] 补充更多参考实现模板（成功案例库模板、反事实抽查模板）
-- [ ] 社区使用案例征集（按四维约束矩阵定位各自环境）
-
-### 中期
-- [ ] EVO-Pro 蓝图：寻找真实生产环境试点 → 验证后发布（含 M7）
-- [ ] EVO-Team 蓝图：团队协作试点 → 验证后发布（含 M8）
-- [ ] 模块库扩展：新论文理论按 M1-M6 同构模式入库
-
-### 长期
-- [ ] 与主流 Agent 框架（LangChain / CrewAI / AutoGen 等）的对接指南
-- [ ] 案例库：不同约束组合下的实战部署记录
+> **Design Principle**: **Release only empirically validated content**. Unvalidated theories are excluded from the library and documented solely in the roadmap to prevent misleading users.
 
 ---
 
-## 贡献指引
+## Future Directions
 
-欢迎通过以下方式参与：
-1. **Issue**：反馈蓝图中的错误、模糊表述、或补充实战经验
-2. **PR**：新增理论模块 / 参考实现模板 / 修正文档 / 补充案例
-3. **讨论**：基于四维约束矩阵分享你的环境定位与落地经验
+### Short-Term
+- [ ] Add more reference implementation templates (Success case library template, Counterfactual sampling template).
+- [ ] Call for community use cases (Mapping environments against the 4D Constraint Matrix).
 
-贡献前请确认：不包含任何个人敏感信息；理论贡献请附论文引用；模块需遵循「论文依据 + AI 可解析核心」结构。
+### Mid-Term
+- [ ] EVO-Pro Blueprint: Identify real production environment pilots
+- [ ] EVO-Team Blueprint: Team collaboration pilots
+- [ ] Module Library Expansion: Integrate new academic theories following the M1-M6 isomorphic pattern.
+
+### Long-Term
+- [ ] Integration guides with mainstream Agent frameworks (LangChain / CrewAI / AutoGen, etc.).
+- [ ] Case Study Library: Practical deployment logs under various constraint combinations.
+
+---
+
+## Contribution Guidelines
+
+We welcome participation through the following methods:
+1. **Issues**: Report errors in blueprints, ambiguous phrasing, or contribute practical experiences.
+2. **PRs**: Add new theory modules / reference templates / documentation fixes / use cases.
+3. **Discussions**: Share your environment positioning and deployment experiences based on the 4D Constraint Matrix.
+
+Before contributing, ensure: No personal sensitive information is included; Theoretical contributions must include paper citations; Modules must strictly adhere to the `Paper Basis + AI-Parseable Core` structure.
