@@ -1,67 +1,49 @@
-# M4 可观测与回滚模块
+# M4 Observability & Rollback Module
 
-> **来源论文**: AHE (arXiv:2604.25850) + Meta-Harness (arXiv:2603.28052)
-> **依赖**: M1（回归门禁需要失败/评估基线）
-> **适用**: 类型2/3（对稳定性有要求的场景；类型1 可用简化版：只做备份回滚）
-
----
-
-## 论文核心主张
-
-- **AHE**: 自进化瓶颈不是"会不会改"，而是"改得可不可观测、能不能回滚"；组件/经验/决策三维可观测。
-- **Meta-Harness**: Harness（包裹模型的系统层）可以被 Agent 自主重写；文件系统 + 完整轨迹 + 自主诊断。
-
-## AI 可解析核心
-
-### ① 可观测与回滚的能力契约 (Capability Contract)
-
-> EVO-CORE 对门禁/回滚的具体工具保持中立，只约定三大能力契约：
-
-1. **契约 ①：组件可观测 (Component Observability)**  
-   规则 / 记忆 / 技能 / 脚本必须**分文件解耦**存放，禁止塞进单一巨型文件；每次修改有明确挂载点与独立回滚粒度。
-2. **契约 ②：决策可观测 (Decision Observability)**  
-   每次核心变更必须记录「证据 / 根因 / 目标 / 预测」，让"为什么改、改了会怎样"可下钻、可追溯。
-3. **契约 ③：回归可拦截 (Regression Gate)**  
-   修改核心组件后必须跑回归验证，任一检查项不达标即禁止合并，防止"拆东墙补西墙"。
+> **Source Papers**: AHE (arXiv:2604.25850) + Meta-Harness (arXiv:2603.28052)
+> **Dependencies**: M1 (For regression baselines)
+> **Applicability**: Tier 2/3 (Frequent modifications)
 
 ---
 
-### ② 开放式选型参考谱系 (Implementation Spectrum)
+## Core Claims
+- **AHE**: The bottleneck of self-evolution is observability and rollback capability.
+- **Meta-Harness**: The system harness wrapping the model can be autonomously rewritten using file systems and trajectory diagnostics.
 
-| 谱系档位 | 适用场景 | 典型载体参考（仅作启发，不作强制） |
+## AI-Parseable Core
+
+### ① Capability Contract for Observability & Rollback
+1. **Contract 1: Component Observability**: Rules/Memory/Skills must be stored in decoupled files, never a giant prompt.
+2. **Contract 2: Decision Observability**: Core changes must document "Evidence / Root Cause / Goal / Prediction".
+3. **Contract 3: Regression Gate**: Any change to core components must pass a regression test; failures block merges.
+
+---
+
+### ② Implementation Spectrum
+| Tier | Scenario | Typical Reference Carrier (For Inspiration, Not Mandatory) |
 |---|---|---|
-| **极简谱系 (Minimal)** | 单机、改动少 | 手动 `.bak` 备份 + 本地单测脚本 |
-| **标准谱系 (Standard)** | 个人端侧、改动频繁 | 本地一键回归脚本（端口/健康分/失败校验/评估集） + 文件级备份 + Git 回退 |
-| **企业谱系 (Advanced)** | 生产级、多环境 | CI/CD 流水线（GitHub Actions/GitLab CI）+ 镜像回滚 + 蓝绿/金丝雀发布 + 覆盖率门禁 |
+| **Minimal** | Single machine, rare changes | Manual `.bak` backup + local scripts |
+| **Standard** | Edge device, frequent changes | 15s local bash regression (`harness_check.sh`) + Git revert |
+| **Advanced** | Production CI/CD | GitHub Actions / GitLab CI + Codecov + Docker Rollback |
 
 ---
 
-### ③ 决策可观测（变更契约，四要素）
-
-每次修改核心组件，必须写明（可写进变更日志）：
-```
-证据: 哪个失败/需求触发
-根因: 推断的根因
-目标: 要修好什么
-预测: 预计修好哪些 / 可能弄坏哪些（下一轮验证）
+### ③ Decision Observability (Change Contract)
+```text
+Evidence: Triggering failure/need
+Root Cause: Inferred reason
+Goal: Expected fix
+Prediction: Potential regressions to monitor
 ```
 
-### ④ 回归门禁（防拆东墙补西墙）
-
-```
-改核心脚本/规则后 → 跑回归:
-  ① 端口/服务存活
-  ② 健康检查（基准分数达标）
-  ③ 失败日志格式校验 + 复发率 ≤30%
-  ④ 评估集命中率 ≥80%（如有）
-任一失败 → 禁止合并
+### ④ Regression Gate
+```text
+Post-modification → Run Regression:
+  ① Port/Service Liveness
+  ② Health Check (Score = 100)
+  ③ M1 Log Format Check + Recurrence ≤ 30%
+Any failure → Block Merge
 ```
 
-### ⑤ 备份回滚硬规则
-
-- 修改关键文件前强制 `.bak` 镜像；
-- 变更可回滚到上一版本。
-
-## 适用场景
-
-- 长期运行、修改频繁的 Agent；防止"改一处崩一片"。
+### ⑤ Backup Hard Rule
+- Force `.bak` snapshot before mutating critical files.

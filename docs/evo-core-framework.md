@@ -1,126 +1,75 @@
-# EVO-CORE 架构规范：Agent 自进化底层核心框架（v1.0）
+# EVO-CORE Architecture Specification: Underlying Core Framework (v1.0)
 
-> **官方全称**: **EVO-CORE: An Observability-Driven, Multi-Tiered Self-Evolution Architecture for Autonomous Agents**
-> **定位**: 通用方法论地基（纯理论骨架，环境无关，不绑定任何具体硬件、用户或个人信息）
-> **用法**: 本框架是地基规范。上层具体蓝图（EVO-Lite / EVO-Pro / EVO-Team）基于本框架根据约束矩阵派生
-> **关联文献**: APO · TextGrad · PlugMem · SkillX · Trace2Skill · Skill0.5 · SkillForge · SkVM · Meta-Harness · AHE · Continual Harness · Task as Training
+> **Official Name**: **EVO-CORE: An Observability-Driven, Multi-Tiered Self-Evolution Architecture for Autonomous Agents**
+> **Positioning**: Universal methodology foundation (pure theoretical skeleton, environment-agnostic, not bound to any specific hardware, user, or proprietary information).
+> **Usage**: This framework serves as the baseline specification. Upper-level blueprints (EVO-Lite / EVO-Pro / EVO-Team) are derived from this framework based on the Constraint Decision Matrix.
+> **Associated Literature**: APO · TextGrad · PlugMem · SkillX · Trace2Skill · Skill0.5 · SkillForge · SkVM · Meta-Harness · AHE · Continual Harness · Task as Training
 
 ---
 
-## 〇、约束决策矩阵（本框架的入口，先查这个）
+## 0. Constraint Decision Matrix (Entry Point)
 
-> 核心思想：**决定方案的不是「你是什么人」，而是「你有什么约束」**。先用四维约束定位，再套理论、定方案。人群标签（个人/专业/工作室）只是约束组合的方便命名。
+> **Core Philosophy**: System designs are determined by objective constraints, not by human labels. Identify your 4D constraints first, then apply the theory to determine the solution.
 
-### 四维约束
-
-| 约束维度 | 关键取值 | 对方案的决定性影响 |
+### 4D Constraints
+| Dimension | Key Values | Decisive Impact on Solution |
 |---|---|---|
-| **算力** | 端侧(无GPU) / 云端可扩展 / 混合 | 端侧 → 排除 RL 内化；云端 → 可评估参数优化 |
-| **成本** | 零预算 / 有限预算 / 充足预算 | 零预算 → 规则引擎优先；充足 → 付费 API 分层 |
-| **规模** | 单用户 / 单团队 / 多用户生态 | 多用户 → 引入经验共享 + 权限隔离 |
-| **可靠性** | 个人容忍 / 生产级 / 协作级 | 生产级 → 可观测 + 审计 + 回归门禁 |
+| **Compute** | Edge (No GPU) / Cloud Scalable / Hybrid | Edge → Exclude RL internalization; Cloud → Allows parametric optimization |
+| **Cost** | Zero Budget / Limited / Abundant | Zero → Rule engine priority; Abundant → Paid API tiers |
+| **Scale** | Solo User / Single Team / Multi-User | Multi-User → Introduce skill sharing & access isolation |
+| **Reliability**| Personal Tolerance / Production / Collab | Production → Observability + Auditing + Regression Gates |
 
-### 决策流程（3 步）
-
-```
-① 判四维约束 → ② 对照矩阵定「用哪些理论 / 排除哪些」→ ③ 生成对应分层蓝图
-```
-
-### 三个典型约束组合（当前已落地的分层蓝图实例）
-
-| 命名 | 算力 | 成本 | 规模 | 可靠性 | 关键决策 |
-|---|---|---|---|---|---|
-| **个人开发者** | 端侧 | 零预算 | 单用户 | 个人容忍 | 排除 RL 内化、多用户生态；规则引擎优先 |
-| **专业开发者** | 云端 | 有限预算 | 单产品 | 生产级 | 可评估 RL 内化；完整可观测 + 审计门禁 |
-| **工作室** | 混合 | 团队预算 | 多用户 | 协作级 | 引入经验共享 + 权限隔离 |
-
-> 未来出现新约束组合（如「云端+零预算+多用户」的开源协作），从矩阵推导即可，无需新增人群标签。
+### Decision Flow
+`① Identify 4D Constraints → ② Map to Matrix to "Include/Exclude Theories" → ③ Generate Tiered Blueprint`
 
 ---
 
-## 一、六大核心框架理论（15 篇论文提炼，通用）
+## I. Six Core Framework Theories (Universal)
 
-### 框架 1｜反馈闭环引擎（Textual Gradient Loop）
-**来源**: APO/ProTeGi · TextGrad · SkillForge
-**一句话**: 任何 Agent 自进化都跑不掉这个四步循环——
+### Framework 1 | Textual Gradient Loop (Feedback Engine)
+**Sources**: APO/ProTeGi · TextGrad · SkillForge
+**One-liner**: Agent self-evolution relies on a 4-step cycle: `Failure Sample → Textual Criticism → Directional Rewrite → Verification`.
+- **Textual Gradients**: "Readable failure diagnostics" explaining what went wrong and how to fix it, rather than numerical derivatives.
+- **Non-parametric Evolution**: Modifies external states (prompts/skills/memory), leaving model weights frozen.
 
-```
-失败样本 → 语言批评(文本梯度) → 定向改写 → 验证
-   ↑                                      │
-   └──────────── 复发监控(闭环) ←─────────┘
-```
+### Framework 2 | Non-parametric Evolution
+**Sources**: Permeates all 12 papers
+**One-liner**: Agent Capability = Model Weights (Frozen) + External State (Evolvable).
+- **Core Insight**: In constrained environments (no GPU/training budget), evolving the external state is the **only viable** path to self-improvement.
 
-- **文本梯度**: 不是数值导数，而是「可读的失败诊断」——回答"哪里错、为什么错、往哪改"。
-- **非参数更新**: 改写对象是外部状态（prompt/skill/记忆/规则），不动模型权重。
-- **关键约束**: 失败诊断必须有证据链，不能臆测；改完必须验证。
+### Framework 3 | Memory Hierarchy & Retrieval Priority
+**Sources**: PlugMem
+**One-liner**: **Retrieval > Structure > Reasoning** — The bottleneck is retrieval availability.
+- Separates Propositional knowledge (facts) from Prescriptive knowledge (SOPs).
+- **Cascading Error Prevention**: Retrieval errors amplify downstream; traceability is required.
 
-### 框架 2｜外部状态进化（Non-parametric Evolution）
-**来源**: 贯穿 15 篇
-**一句话**: Agent 的能力 = 模型权重（冻结）+ 外部状态（可进化）。
+### Framework 4 | Skill Lifecycle & Stratification
+**Sources**: SkillX · Trace2Skill
+**One-liner**: Skills are "natural language programs" requiring full-lifecycle management.
+- **3-Tier Hierarchy**: Strategic (Planning) → Functional (SOPs) → Atomic (Robust actions).
+- **Anti-Overfitting Threshold**: Single failures are merely logged. Only high-frequency recurrences (≥2~3 times) trigger global rule upgrades.
 
-| 外部状态类型 | 对应载体 | 进化方式 |
-|---|---|---|
-| 行为规则/人格 | system prompt / 准则文件 | 低频、人工确认 |
-| 技能/流程 | skill 目录 | 踩坑→补 pitfalls，成功→固化 steps |
-| 记忆/知识 | 知识库 + 检索层 | 增删改 + 向量索引 + 去重 |
-| 脚手架/Harness | 中间件、调度代码 | 可观测→重写→回滚 |
+### Framework 5 | Observability Governance & Safe Rollback
+**Sources**: AHE · Meta-Harness
+**One-liner**: The bottleneck isn't "how to change," but "whether the change is observable and reversible."
+- **3D Observability**: Component (file decoupling), Experience (log drill-down), Decision (evidence/root-cause documentation).
+- **Regression Gates**: Modifications must pass regression tests before merging.
 
-**核心洞察**: 在受限环境下（无 GPU、无训练预算），这是**唯一可行**的自进化路线。
-
-### 框架 3｜知识分层与检索优先（Memory Hierarchy）
-**来源**: PlugMem
-**一句话**: **检索 > 结构 > 推理**——记忆系统的瓶颈在检索可用性，其次才是结构化，最后才是推理消耗。
-
-- 命题知识（knowing-that，事实）vs 处方知识（knowing-how，流程）分层存储。
-- 检索层必须"健康"（可用性、新鲜度、无残留），否则下游全崩。
-- 级联防错: 抽取错误会沿链路放大，必须溯源（trace）。
-
-### 框架 4｜技能分层与生命周期（Skill Lifecycle）
-**来源**: SkillX · Trace2Skill
-**一句话**: 技能是「自然语言程序」，要分层组织 + 全生命周期管理。
-
-- **三层分级**: 战略层（长程规划）→ 功能层（工具流 SOP）→ 原子层（单步稳健操作）。
-- **三生命周期**: 选择（路由挂载）→ 利用（执行）→ 蒸馏（回写经验），三者闭环统一。
-- **防过拟合门槛**: 单次失败只记不改；同类高频出现（≥2~3 次）才允许升级规则。
-
-### 框架 5｜可观测治理与安全回滚（Observability & Safe Rollback）
-**来源**: AHE · Meta-Harness
-**一句话**: 自进化的瓶颈不是"会不会改"，而是"改得可不可观测、能不能回滚"。
-
-- **三维可观测**: 组件可观测（文件级解耦）· 经验可观测（日志可下钻）· 决策可观测（写明证据/根因/预期）。
-- **最小修改**: 精准局部 patch，拒绝推倒重写（防灾难性漂移）。
-- **回归可拦截**: 改动后跑回归验证，不达标禁止合并（防拆东墙补西墙）。
-
-### 框架 6｜能力感知架构（Capability-Aware Architecture）
-**来源**: Skill0.5 · Continual Harness · SkVM
-**一句话**: 组件复杂度必须匹配基座模型能力，否则"给自行车装喷气引擎反而骑不稳"。
-
-- **动静分层**: 通用行为直觉（内化/强约束）vs 易变任务技能（外挂/随需加载）。
-- **能力地板效应**: 弱模型配复杂自进化组件反而更差——按模型分层用精简组件。
-- **确定性操作代码化 (JIT)**: 能用本地脚本/正则确定处理的任务固化为代码执行，绕过 LLM，实现零 Token、零延迟。
-- **反事实检验**: 撤除技能看表现是否退化，验证是否真依赖技能（防走捷径）。
-- **精简的正确姿势（通用原则）**: 只精简「该模型实际会接触的组件/供给内容」，非盲目拆全部；优先做「知识/指令供给侧精简」（如长文档配精简摘要版），而非大改组件本体。复杂组件若只由强模型使用，无需为弱模型降级。
+### Framework 6 | Capability-Aware Architecture
+**Sources**: Skill0.5 · Continual Harness · SkVM
+**One-liner**: Component complexity must match the base model's capabilities ("Capability Floor Effect").
+- **JIT Specialization**: Deterministic tasks should be compiled into native code (Python/Bash) to bypass the LLM entirely (zero token, zero latency).
+- **Counterfactual Verification**: Temporarily remove a skill to verify if performance actually degrades, preventing dependency shortcuts.
 
 ---
 
-## 二、底层框架的适用边界（重要）
-
-- ✅ **适用**: 走「冻结模型、进化外部状态」路线的任何 Agent 系统（端侧到云端皆可）。
-- ❌ **不适用**: 需要 RL 训练/参数内化/多卡算力的场景（该方向属于「参数优化」路线，与本框架采用的「外部状态进化」属于不同技术路线，不可混用）。
-- ⚠️ **原则**: 硬约束变了，路线要重推——底层框架的「六个框架理论」通用，但「具体落地方案」必须按环境重写。
+## II. Applicability Boundaries
+- ✅ **Applicable**: Any agent system utilizing the "Frozen Model, Evolving External State" paradigm.
+- ❌ **Not Applicable**: Scenarios requiring RL training/parametric internalization (this belongs to the Parametric Optimization branch, which is a fundamentally different technical route).
 
 ---
 
-## 三、分层蓝图叠加规则（模块选配机制）
-
-上层蓝图（EVO-Lite/Pro/Team）在本框架上组合理论模块时，遵循：
-
-1. **六个核心框架理论 = 必备底座**，所有分层蓝图都必须具备。
-2. **理论模块 = 按约束选配**：从 `theory-modules/`（M1-M6）按「算力×成本×规模×可靠性」选配，蓝图只给推荐组合，可自由组合。
-3. **选配决策规则**：
-   - M1（失败闭环）= 地基，建议必选；
-   - 算力不足 → 降级选配（如 M2 纯关键词检索、M4 只做备份回滚）；
-   - 模块间有依赖的，选配时自动带上依赖模块；
-   - 未实战验证的理论（M7 参数内化 / M8 多用户生态）不入库，仅在路线图标注。
-4. **工程实践/实战经验 = 下沉到各分层蓝图**，不写进底层框架——底层只留「环境无关」的理论骨架。
-5. **每层独立建档、独立验证标准**，不污染底层框架。
+## III. Blueprint Stacking Rules (Module Selection Mechanism)
+1. **6 Core Theories = Mandatory Foundation**.
+2. **Theory Modules = Selected by Constraints** (M1-M6) from `theory-modules/`.
+3. **Engineering Practices = Delegated to Tiered Blueprints**, keeping the underlying framework purely environment-agnostic.

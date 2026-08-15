@@ -12,7 +12,7 @@
 
 ```
 ┌──────────────────────────────────────────────────────────┐
-│ ① 底层核心框架  docs/evo-core-framework.md               │
+│ ① 底层核心框架  docs/evo-core-framework_CN.md               │
 │    15 篇论文的核心要素提炼（环境无关的理论骨架）          │
 │    6 大框架理论 + 四维约束决策矩阵（算力×成本×规模×可靠性）│
 └───────────────────────┬──────────────────────────────────┘
@@ -41,16 +41,16 @@ evo-core/
 ├── REFERENCES.md           # 15 篇论文引用（理论来源）
 ├── ROADMAP.md              # 版本与未来方向
 ├── docs/
-│   ├── evo-core-framework.md   # 底层核心框架（6理论 + 约束矩阵）
-│   └── evo-tier-a-lite.md      # EVO-Lite 蓝图（3档算力推荐配置）
+│   ├── evo-core-framework_CN.md   # 底层核心框架（6理论 + 约束矩阵）
+│   └── evo-tier-a-lite_CN.md      # EVO-Lite 蓝图（3档算力推荐配置）
 ├── theory-modules/              # ★ 理论模块库（可自由选配）
 │   ├── README.md                # 模块索引与快速选配指引
-│   ├── M1-failure-loop.md       # 失败闭环（APO + SkillForge）
-│   ├── M2-memory-retrieval.md   # 记忆与检索（PlugMem）
-│   ├── M3-skill-lifecycle.md    # 技能生命周期（SkillX + Trace2Skill）
-│   ├── M4-observability-rollback.md  # 可观测与回滚（AHE + Meta-Harness）
-│   ├── M5-capability-match.md   # 能力感知（Skill0.5 + Continual Harness）
-│   └── M6-self-healing.md       # 环境自愈（Continual Harness + SkVM）
+│   ├── M1-failure-loop_CN.md       # 失败闭环（APO + SkillForge）
+│   ├── M2-memory-retrieval_CN.md   # 记忆与检索（PlugMem）
+│   ├── M3-skill-lifecycle_CN.md    # 技能生命周期（SkillX + Trace2Skill）
+│   ├── M4-observability-rollback_CN.md  # 可观测与回滚（AHE + Meta-Harness）
+│   ├── M5-capability-match_CN.md   # 能力感知（Skill0.5 + Continual Harness）
+│   └── M6-self-healing_CN.md       # 环境自愈（Continual Harness + SkVM）
 └── templates/                  # 参考实现骨架（脱敏，按环境适配）
     ├── failure_closed_loop_template.py
     ├── regression_gate_template.sh
@@ -67,10 +67,10 @@ git clone https://github.com/<your-name>/evo-core.git
 cd evo-core
 
 # 2. 读底层框架，判你的约束（四维约束矩阵）
-#    → docs/evo-core-framework.md
+#    → docs/evo-core-framework_CN.md
 
 # 3. 按你的档位选配模块（或自由组合）
-#    → docs/evo-tier-a-lite.md（个人开发者推荐配置）
+#    → docs/evo-tier-a-lite_CN.md（个人开发者推荐配置）
 #    → theory-modules/（查看各模块 AI 可解析定义）
 #    → templates/（参考实现骨架，可选）
 ```

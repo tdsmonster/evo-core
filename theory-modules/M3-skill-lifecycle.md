@@ -1,44 +1,34 @@
-# M3 技能生命周期模块
+# M3 Skill Lifecycle Module
 
-> **来源论文**: SkillX (arXiv:2604.04804) + Trace2Skill (arXiv:2603.25158)
-> **依赖**: M1（失败/成功记录是沉淀素材）
-> **适用**: 类型2/3（任务类型多、有重复性 SOP 的场景）
+> **Source Papers**: SkillX (arXiv:2604.04804) + Trace2Skill (arXiv:2603.25158)
+> **Dependencies**: M1 (Logs as raw material)
+> **Applicability**: Tier 2/3 (High repetitive SOP scenarios)
 
 ---
 
-## 论文核心主张
+## Core Claims
+- **SkillX**: Skills should follow a 3-tier hierarchy: Strategic (Long-term) → Functional (SOPs) → Atomic (Robust actions).
+- **Trace2Skill**: Both successes and failures must be distilled. Static compact catalogs outperform massive dynamic retrieval databases.
 
-- **SkillX**: 技能应三层分级——战略层（长程规划）→ 功能层（工具流 SOP）→ 原子层（单步稳健操作）。
-- **Trace2Skill**: 成功与失败都要沉淀（SuccessAnalyst + ErrorAnalyst）；静态紧凑目录优于海量检索库。
+## AI-Parseable Core
 
-## AI 可解析核心
-
-### ① 技能三层组织规则
-
-| 层级 | 职责 | 示例 |
+### ① 3-Tier Organization Rule
+| Tier | Role | Example |
 |---|---|---|
-| 战略层 | 长程流程/多步规划 | 项目交付全流程、数据处理流水线 |
-| 功能层 | 复合工具 SOP | 登录→查数据→导出 的固定步骤 |
-| 原子层 | 单步稳健操作 | 单条 API 调用、单个正则解析 |
+| Strategic | Multi-step planning | E2E delivery, data pipelines |
+| Functional | Composite SOPs | Login → Query → Export |
+| Atomic | Robust single actions | API call, Regex parse |
 
-### ② 双向沉淀规则
+### ② Bi-directional Distillation
+- **Failure**: Log to M1 (9 columns).
+- **Success**: Log complex wins (Task/Challenge/Solution/Gains) for reuse.
 
-- **失败沉淀**: 每次失败写 M1 失败日志（9列）
-- **成功沉淀**: 攻克难题后写成功日志（9列）——任务/挑战/方案/工具/收益/验证，供同类任务复用
-
-### ③ 防过拟合门槛（关键）
-
+### ③ Anti-Overfitting Threshold (Critical)
+```text
+Single Failure → Log only, do not alter core rules
+Recurring (≥2~3 times) → Upgrade to universal rule/SOP
 ```
-单次失败     → 只记日志，不改核心规则
-同类 ≥2~3 次 → 才允许升级为通用规则/SOP
-```
+> Goal: Prevent overfitting system rules to isolated noise.
 
-> 目的: 防止对偶发噪声过度反应，把个别事件误固化成规则。
-
-### ④ 静态目录优先
-
-- 技能/规则放**静态紧凑目录**（可检索的 markdown/SKILL 文件），不依赖每次动态检索海量库。
-
-## 适用场景
-
-- 重复性任务多、希望"越用越顺"的 Agent。
+### ④ Static Catalog Priority
+- Store skills/rules in a static, searchable markdown directory rather than a bloated vector DB.

@@ -1,28 +1,27 @@
-# 理论模块库（Theory Modules）
+# Theory Modules Library
 
-> 定位: EVO-CORE 的「可组合零件库」——底层框架是骨架，本库是其余论文理论按主题模块化的选配件。
-> 用法: 按四维约束（算力/成本/规模/可靠性）选配模块；分层蓝图（EVO-Lite/Pro/Team）给出推荐组合，也可自由组合。
-> 每个模块结构: 来源论文 → 论文核心主张 → **AI 可解析核心**（判定规则/格式/统计口径/阈值）→ 依赖 → 适用场景。
+> **Positioning**: EVO-CORE's "Composable Component Library". The framework provides the skeleton; this library provides modularized theories based on specific papers.
+> **Usage**: Select modules based on 4D constraints (Compute/Cost/Scale/Reliability).
+> **Structure**: Source Paper → Core Claim → **AI-Parseable Core** (Rules/Formats/Metrics) → Dependencies.
 
-## 模块索引
+## Module Index
 
-| 模块 | 名称 | 来源论文 | 依赖 | 核心能力 |
+| Module | Name | Source Papers | Dependencies | Core Capability |
 |---|---|---|---|---|
-| **M1** | 失败闭环 | APO/ProTeGi + SkillForge | 无 | 失败记录/四维归因/复发率监控 |
-| **M2** | 记忆与检索 | PlugMem | 无 | 混合检索/健康检查/分层记忆/小模型知识供给 |
-| **M3** | 技能生命周期 | SkillX + Trace2Skill | M1 | 技能分层/双向沉淀/防过拟合 |
-| **M4** | 可观测与回滚 | AHE + Meta-Harness | M1 | 文件级解耦/回归门禁/备份回滚 |
-| **M5** | 能力感知 | Skill0.5 + Continual Harness | M2 | 模型分层/反事实抽查/能力地板/RAG驱动打标 |
-| **M6** | 环境自愈 | Continual Harness + SkVM | 无 | AOT依赖预检/看门狗自愈 |
+| **M1** | Failure Closed-Loop | APO/ProTeGi + SkillForge | None | Failure logging, 4D attribution, recurrence monitoring |
+| **M2** | Memory & Retrieval | PlugMem | None | Hybrid RRF, health checks, small model context injection |
+| **M3** | Skill Lifecycle | SkillX + Trace2Skill | M1 | Stratification, bi-directional distillation, anti-overfitting |
+| **M4** | Observability & Rollback | AHE + Meta-Harness | M1 | File decoupling, regression gates, safe rollbacks |
+| **M5** | Capability-Awareness | Skill0.5 + Continual Harness | M2 | Floor effect, RAG-driven tagging, counterfactual verification |
+| **M6** | Environment Self-Healing| Continual Harness + SkVM | None | AOT preflight checks, backoff healing, daemons |
 
-## 快速选配指引（完整推荐见各蓝图）
+## Quick Selection Guide
 
+```text
+Compute-Constrained (≤8GB)  → M1 + M6 (Rule-based & healing only)
+Edge Hybrid (16-32GB)       → M1 + M2 + M3 + M5 + M6 (+M4 optional)
+Local Geek (≥64GB)          → M1-M6 (Full suite)
+Production (Cloud)          → M1-M6 + Parametric Internalization (M7)
+Multi-User (Team)           → M1-M6 + Experience Sharing (M8)
 ```
-算力受限(≤8GB)    → M1 + M6（零本地模型，纯规则与自愈）
-端侧混合(16-32GB) → M1 + M2 + M3 + M5 + M6（+M4可选，RAG驱动小模型打标+技能闭环）
-本地极客(≥64GB)   → M1-M6 全选（全栈本地托管与全自进化）
-生产级(云端)      → M1-M6 + 参数内化(M7, 算力门槛)
-多用户(团队)      → M1-M6 + 经验共享(M8, 待验证)
-```
-
-> 注: M7(参数内化/SKILL0-1) 与 M8(多用户生态/SkillClaw) 为理论推演、未实战验证，暂不入库，仅在路线图标注。
+> Note: M7 and M8 remain theoretical and are solely tracked in the ROADMAP.

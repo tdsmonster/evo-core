@@ -1,108 +1,48 @@
-# EVO-Tier A｜EVO-Lite（个人开发者蓝图 v1.0）
+# EVO-Tier A | EVO-Lite (Solo Developer Blueprint v1.0)
 
-> **归属体系**: 基于 `evo-core-framework.md`（骨架）+ `theory-modules/`（零件库）
-> **约束定位**: 算力=端侧/受限单机 · 成本=零~低预算 · 规模=单用户 · 可靠性=个人容忍
-> **定位**: 本蓝图是**推荐配置**，不是强制方案——按你的算力档位选配理论模块，也可自由组合。
-
----
-
-## 0. 使用前提
-
-- 你已有一个 Agent 运行时（任意框架，如 LangChain/CrewAI/Hermes 等）；
-- 本蓝图教你"给它加自进化层"，不教你搭 Agent 本体；
-- 理论模块的详细 AI 可解析定义见 `theory-modules/`，本蓝图只给推荐组合与理由。
+> **Hierarchy**: Based on `evo-core-framework.md` (Skeleton) + `theory-modules/` (Component Library)
+> **Constraint Targeting**: Compute = Edge/Constrained · Cost = Zero/Low · Scale = Solo · Reliability = Personal Tolerance
+> **Positioning**: This blueprint serves as a **recommended preset**, not a strict mandate.
 
 ---
 
-## 1. 三类硬件算力分型
+## 1. Hardware Compute Profiling
 
-| 算力分型 | 硬件画像 | 架构基线 |
+| Compute Profile | Hardware Persona | Architecture Baseline |
 |---|---|---|
-| **类型 1: 极简轻量型 (Low-Spec)** | 内存 ≤8GB / 树莓派 / 免费云容器 | 纯云端低成本 API + 本地纯规则引擎（不部署本地 LLM） |
-| **类型 2: 端侧混合型 (Mid-Spec / 典型)** | 内存 16~32GB 统一内存 / 入门显卡 | **M2 RAG 前置检索 + 本地轻量小模型 (常驻打标/分类/生成) + 云端大模型 (疑难复杂推理)** |
-| **类型 3: 本地极客型 (High-Spec)** | 内存 ≥64GB / 高显存工作站 | 本地量化中大模型全托管（高隐私、零外网依赖） |
+| **Type 1: Minimal (Low-Spec)** | ≤8GB RAM / Raspberry Pi | Cloud APIs + Local Pure Rule Engine (No local LLM) |
+| **Type 2: Edge Hybrid (Mid-Spec / Typical)** | 16~32GB Unified Memory / Entry GPU | **M2 RAG Context Injection + Local Small Model (Tagging/Classification) + Cloud Large Model (Complex Reasoning)** |
+| **Type 3: Local Geek (High-Spec)** | ≥64GB RAM / Workstation | Fully local quantized mid/large models (Zero external dependencies) |
 
 ---
 
-## 2. 推荐配置表（按算力档位选配理论模块）
+## 2. Recommended Configuration Table
 
-| 算力档位 | 推荐模块组合 | 理由与闭环逻辑 |
+| Compute Tier | Recommended Modules | Rationale & Dataflow |
 |---|---|---|
-| **类型 1** (≤8GB) | **M1 失败闭环 + M6 环境自愈** | 零算力也能跑：纯规则引擎 + 日志闭环 + 看门狗自愈，不依赖本地模型 |
-| **类型 2** (16~32GB) | **M1 + M2 + M3 + M5 + M6**（+M4 可选） | **闭环关键**：M2 (RAG 检索管道) 为 M5 (端侧小模型) 提供确定性上下文，支撑低成本实体打标与生成；M3 沉淀高频 SOP；M6 守护常驻进程 |
-| **类型 3** (≥64GB) | **M1-M6 全选** | 算力充足，可完整实现全栈本地自进化闭环 |
+| **Type 1** (≤8GB) | **M1 (Failure Loop) + M6 (Self-Healing)** | Rule engine + state logging + auto-healing. No local model required. |
+| **Type 2** (16~32GB) | **M1 + M2 + M3 + M5 + M6** (+M4 Optional) | **Crucial Loop**: M2 (RAG) feeds context to M5 (Small Model) for cheap tagging; M3 extracts SOPs; M6 guards daemons. |
+| **Type 3** (≥64GB) | **M1-M6 (All)** | Sufficient compute to realize a full-stack local autonomous evolution pipeline. |
 
-**自由选配原则**：
-- M1（失败闭环）是所有方案的地基，**建议必选**；
-- M2/M3 需要本地模型/知识库支撑，算力不足时可降级（M2 用纯关键词检索，M3 只做失败沉淀不做成功库）；
-- M4 只在"修改频繁、追求稳定"时启用；
-- M5 只在"多模型并用"时启用；
-- M6 有常驻服务就选。
+**Selection Principles**:
+- M1 (Failure Loop) is the foundation for all setups; **highly recommended**.
+- M2/M3 require local model/KB support; downgrade if compute is insufficient.
 
 ---
 
-## 3. 选配模块理论溯源（为什么推荐这些）
+## 3. Implementation Directions (See Templates for Details)
 
-> 详细 AI 可解析定义见各模块文件；此处只说明"来源论文 + 论文提出什么 + 个人场景含义"。
-
-### M1 失败闭环 —— 所有档位必选
-- **来源**: APO/ProTeGi (arXiv:2305.03495) + SkillForge (arXiv:2604.08618)
-- **论文提出**: 失败样本 → 语言批评 → 定向改写 → 验证（APO）；失败四维归因（SkillForge）
-- **个人场景含义**: 单人维护精力有限，失败必须结构化记录 + 复发监控，否则"改了不知道有没有用"
-
-### M2 记忆与检索 —— 类型2/3
-- **来源**: PlugMem (arXiv:2603.03296)
-- **论文提出**: 检索 > 结构 > 推理；记忆分层
-- **个人场景含义**: 知识库检索可用性是生命线，先保证检索健康，再谈质量
-
-### M3 技能生命周期 —— 类型2/3
-- **来源**: SkillX (arXiv:2604.04804) + Trace2Skill (arXiv:2603.25158)
-- **论文提出**: 技能三层分级；成功/失败双向沉淀
-- **个人场景含义**: 重复任务多，技能要分层组织 + 防过拟合（高频才升级规则）
-
-### M4 可观测与回滚 —— 类型2/3 可选
-- **来源**: AHE (arXiv:2604.25850) + Meta-Harness (arXiv:2603.28052)
-- **论文提出**: 组件/经验/决策三维可观测；回归门禁防拆东墙补西墙
-- **个人场景含义**: 改动频繁时用回归门禁兜底，防止改一处崩一片
-
-### M5 能力感知 —— 类型2/3 可选
-- **来源**: Skill0.5 (arXiv:2605.28424) + Continual Harness (arXiv:2605.09998)
-- **论文提出**: 能力地板效应——弱模型配复杂组件反而更差；反事实检验
-- **个人场景含义**: 本地小模型要配精简组件，防止被复杂 SOP 拖垮
-
-### M6 环境自愈 —— 所有档位
-- **来源**: Continual Harness (arXiv:2605.09998) + SkVM (arXiv:2604.03088v3)
-- **论文提出**: 不停机热更新 + 死锁自愈；AOT 依赖预检
-- **个人场景含义**: 24 小时常驻服务要自愈 + AOT 预检，防静默失效
-
----
-
-## 4. 落地方向指引（怎么做，细节见参考实现）
-
-| 方向 | 建议（方向性） |
+| Direction | Recommendation |
 |---|---|
-| 失败闭环落地 | 建立 9 列失败日志 → 严格字段校验 → 周期统计复发率/四维分布 |
-| 检索落地 | 关键词 + 向量混合检索 → 每日健康检查 → NFC 归一防重复 |
-| 技能落地 | 三层组织 → 失败/成功双向沉淀 → 防过拟合门槛 |
-| 自愈落地 | 常驻服务挂看门狗 → 失败退避 → 告警冷却 |
-| 门禁落地 | 改核心脚本后跑回归（服务/健康/复发率/评估） |
-
-> 可执行细节（格式定义、命令、参数）见 `templates/` 参考实现与各模块的「AI 可解析核心」。
+| **Failure Loop** | 9-column failure log → Strict field validation → Track recurrence rate. |
+| **Retrieval** | Keyword + Vector hybrid search → Daily health checks → NFC Unicode normalization. |
+| **Skill Evolution** | 3-Tier organization → Bi-directional distillation → Anti-overfitting threshold. |
+| **Self-Healing** | Daemon watchdogs → Dynamic backoff → Alert cooldowns. |
+| **Regression Gate** | Run automated regressions after core script changes (Liveness/Health/Recurrence). |
 
 ---
 
-## 5. 验证标准（可量化）
-
-- **检索健康度**: 索引覆盖完整、无死链、残留率 <5%
-- **复发受控率**: 处置后同类问题复发率 <30%
-- **零环境中断**: 依赖缺失在 AOT 阶段被拦截，运行期 0 崩溃
-- **Token 精简**: 确定性高频任务 100% 走本地代码化执行
-
----
-
-## 6. 明确不做
-
-- ❌ RL 训练/参数内化（SKILL0/Skill1）：属于「参数优化」路线，与外部状态进化是不同技术路线，且未实战验证（见 M7 路线图）
-- ❌ 多用户生态同步（SkillClaw）：单用户环境无此需求
-- ❌ 图数据库等重架构（规模用不到）
-- ❌ 生产级完整可观测工程（对个人是过度工程，M4 已够用）
+## 4. Explicit Exclusions
+- ❌ **RL Training / Parametric Internalization (SKILL0/Skill1)**: Belongs to the parametric optimization route. Not empirically validated locally (See M7 Roadmap).
+- ❌ **Multi-User Sync (SkillClaw)**: Unnecessary for solo user environments.
+- ❌ **Heavy Architectures**: Graph databases/complex enterprise observability are overkill for this tier.

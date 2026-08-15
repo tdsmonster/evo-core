@@ -1,75 +1,54 @@
-# M2 记忆与检索模块
+# M2 Memory & Retrieval Module
 
-> **来源论文**: PlugMem (arXiv:2603.03296, ICML 2026)
-> **依赖**: 无
-> **适用**: 类型2/3（类型1 可选简化版：纯关键词检索，不建向量）
-
----
-
-## 论文核心主张
-
-- **检索 > 结构 > 推理**: 记忆系统瓶颈在检索可用性，其次结构化，最后才是推理消耗。
-- 命题知识（knowing-that，事实）与处方知识（knowing-how，流程）分层存储。
-- 级联防错: 抽取/索引错误会沿链路放大，必须溯源。
-- **RAG 的双重使命**: RAG 既是面向用户的问答支撑层，更是**端侧轻量小模型（M5）执行打标、分类、过滤任务时不可或缺的事实注入源**（以检索确定性消除小模型幻觉）。
-
-## AI 可解析核心
-
-### ① 检索层的核心能力契约 (Capability Contract)
-
-> EVO-CORE 对具体技术选型保持中立，只约定检索层必须满足的三大能力契约：
-
-1. **契约 ①：双路召回互补 (Dual-Retrieval)**  
-   无论底层采用何种引擎，检索管道必须兼顾「字面精确匹配（专有名词/代码/ID）」与「语义泛化召回（意图/同义句）」，严禁单一弱语义或单一精确匹配。
-2. **契约 ②：供给尺寸硬约束 (Size Bound for Small Models)**  
-   面向下游端侧小模型（M5）提供上下文时，召回的 Top-K 片段总 Tokens 必须限制在安全窗口内（如 1K~2K Tokens），严禁无节制拼接长文本导致小模型 Prefill 性能断崖下跌。
-3. **契约 ③：健康度自检契约 (Self-Inspection)**  
-   检索层必须提供自动化健康探针（验证索引可用性、新鲜度、残留碎片率），防止索引静默腐烂。
+> **Source Paper**: PlugMem (arXiv:2603.03296, ICML 2026)
+> **Dependencies**: None
+> **Applicability**: Tier 2/3 (Tier 1 can use pure keyword search without vectors)
 
 ---
 
-### ② 开放式选型参考谱系 (Implementation Spectrum)
+## Core Claims
+- **Retrieval > Structure > Reasoning**: The bottleneck in memory systems is retrieval availability, followed by structure, and lastly reasoning overhead.
+- Propositional knowledge (knowing-that) and prescriptive knowledge (knowing-how) must be stored hierarchically.
+- **RAG's Dual Mission**: RAG serves not only user Q&A but provides **deterministic context injection for Edge Small Models (M5)** to eliminate hallucination during tagging/classification.
 
-开发者可根据自身约束在以下谱系中自由选配，只要满足上述能力契约与验证标准即可：
+## AI-Parseable Core
 
-| 谱系档位 | 适用场景与约束 | 典型架构参考（仅作启发，不作强制） | 特点 |
-|---|---|---|---|
-| **极简谱系 (Minimal)** | 内存极度受限（≤8GB）、纯文本笔记、零外部依赖 | 纯工具级关键词检索 (`ripgrep` / `fzf` / 正则扫描) | 零依赖、毫秒级响应、免安装任何模型 |
-| **标准混合谱系 (Hybrid)** | 端侧单机（16~32GB）、本地小模型打标、个人知识库 | **轻量混合管道**：BM25/关键词 + 轻量本地 Embedding + RRF/加权合并 (如 SQLite/Chroma/Faiss) | 平衡语义理解与端侧开销，无云端费用 |
-| **企业高阶谱系 (Advanced)** | 云端生产级、百万级文档库、高并发高精准度 | **分布式流水线**：Qdrant/Milvus + Cross-Encoder Reranker + GraphRAG 图谱增强 | 最大化多跳推理与复杂召回率 |
+### ① Capability Contract for Retrieval
+> EVO-CORE remains neutral on specific tooling but mandates three strict capability contracts:
+
+1. **Contract 1: Dual-Retrieval**: Pipeline must combine exact term matching (keywords/IDs) and semantic matching (intent), preventing single-method weaknesses.
+2. **Contract 2: Size Bound for Small Models**: Top-K context fed to small models (M5) must be strictly budgeted (e.g., 1K~2K tokens) to prevent prefill memory overflow.
+3. **Contract 3: Self-Inspection**: Must auto-check index availability, freshness, and orphan fragment rate.
 
 ---
 
-### ③ 标准混合检索参考流程（典型 RRF 实现）
+### ② Implementation Spectrum
 
-```
-用户/小模型查询 → ① 关键词检索(ripgrep) 召回 Top-K1 (精确命中)
-                → ② 向量检索(本地 Embedding) 召回 Top-K2 (语义泛化)
-                → ③ RRF 融合公式: score(d) = Σ 1/(60 + rank_i(d))
-                → ④ 输出 Top-N 确定性事实证据，注入 Prompt 供 M5 小模型打标或主模型回答
+| Tier | Scenario | Typical Reference Carrier (For Inspiration, Not Mandatory) |
+|---|---|---|
+| **Minimal** | ≤8GB RAM, text notes, zero external dependencies | `ripgrep` / `fzf` / Regex |
+| **Hybrid** | 16~32GB, local small model | BM25 + Local Embedding + RRF (SQLite/Chroma/Faiss) |
+| **Advanced** | Cloud production, millions of docs | Qdrant/Milvus + Cross-Encoder + GraphRAG |
+
+---
+
+### ③ Standard Hybrid Retrieval Flow (RRF Implementation)
+```text
+Query → ① Keyword Search (Top-K1) 
+      → ② Vector Search (Top-K2)
+      → ③ RRF Fusion: score(d) = Σ 1/(60 + rank_i(d))
+      → ④ Output Top-N context for M5 injection
 ```
 
-- **最低依赖约束**: 纯本地运行，不引入 Neo4j、Elasticsearch、Milvus 等常驻重型集群；
-- **小模型绑定**: 检索出来的证据片段必须控制在 1K~2K Tokens 以内，防止端侧小模型 Prefill 内存溢出。
-
-### ④ 健康检查指标（每日自检）
-
-| 指标 | 判定 |
+### ④ Health Inspection Metrics (Daily)
+| Metric | Condition |
 |---|---|
-| 向量库可用性 | 能打开、能查询 |
-| 新鲜度 | 最后索引时间 < 24h |
-| 残留率 | 向量库文件数 vs 实际文件数差异 < 5% |
-| 下游存活 | 生成服务端口可达 |
+| DB Availability | Openable, queryable |
+| Freshness | Last indexed < 24h |
+| Orphan Rate | DB files vs real files diff < 5% |
 
-### ⑤ Unicode 归一硬规则
+### ⑤ Unicode Normalization Rule
+- For file/path matching, apply `unicodedata.normalize('NFC')` to prevent duplicates (e.g., macOS defaults to NFD).
 
-- 涉及文件名/路径比较，**必须 `unicodedata.normalize('NFC')` 后再比较**（macOS 文件名默认 NFD 编码，与库内 NFC 不一致会导致重复索引/误判失败）。
-
-### ⑥ 记忆 Decay 规则
-
-- 注入的上下文记忆文件设硬上限（如 4000 字符）；
-- 低频/陈旧事实定期下沉到归档文件，记忆只留高频指针。
-
-## 适用场景
-
-- 有知识库/RAG 需求的 Agent；检索可用性是第一生命线。
+### ⑥ Memory Decay Rule
+- Context injection limits (e.g., 4000 chars); stale facts demoted to archive, leaving only pointers in hot memory.

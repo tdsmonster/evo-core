@@ -1,47 +1,35 @@
-# M5 能力感知模块
+# M5 Capability-Aware Module
 
-> **来源论文**: Skill0.5 (arXiv:2605.28424) + Continual Harness (arXiv:2605.09998)
-> **依赖**: M2（知识与检索层 —— 小模型做打标与分类的先决条件是外挂 RAG 提供确定性上下文）
-> **适用**: 类型2/3（多模型并用、本地小模型参与的架构）
+> **Source Papers**: Skill0.5 (arXiv:2605.28424) + Continual Harness (arXiv:2605.09998)
+> **Dependencies**: M2 (RAG is a prerequisite for small model tagging)
+> **Applicability**: Tier 2/3 (Multi-model architectures)
 
 ---
 
-## 论文核心主张
+## Core Claims
+- **Skill0.5**: Joint Dual-Track for internalized behaviors vs. externalized skills.
+- **Continual Harness**: "Capability Floor Effect" — weak models perform worse with overly complex self-evolution components.
 
-- **Skill0.5**: 通用行为内化 + 易变任务技能外挂双轨制；反事实检验（撤除技能看是否退化）。
-- **Continual Harness**: 能力地板效应——弱模型配复杂组件反而更差，组件复杂度必须匹配模型能力。
+## AI-Parseable Core
 
-## AI 可解析核心
+### ① RAG Prerequisite for Edge Models
+- Local small models (2B~27B) lack internal knowledge. **Running them bare for tagging is prohibited.**
+- **Supply before Reasoning**: Before extracting entities or tagging, M2 (RAG) must inject deterministic evidence into the Prompt.
 
-### ① 端侧小模型推理的前提：RAG 知识外挂依赖
-- **小模型的固有局限**: 本地轻量模型（如 2B~27B）参数容量有限，内部先验知识易漂移/幻觉，**严禁脱离上下文让小模型裸跑打标**；
-- **先供给后推理原则**: 小模型执行实体提取、主题打标、摘要生成前，**必须由 M2 (RAG 检索链路) 先行检索出确定性的事实证据片段并注入 Prompt**，以外挂检索质量弥补模型参数劣势。
-
-### ② 模型分层与组件适配规则
-
-```
-强模型（云端/高阶模型）→ 完整版组件（全细节、多分支、长 SOP、复杂推理）
-弱模型（端侧/轻量模型）→ 精简版组件（确定性 Context 注入 + 单一职责 Prompt + 砍掉多余分支）
+### ② Capability Matching Rule
+```text
+High-Tier Model (Cloud) → Full components (deep details, branching SOPs)
+Low-Tier Model (Edge) → Trimmed components (Deterministic Context + Single Responsibility Prompt)
 ```
 
-### ③ 能力地板精简原则
+### ③ Trimming Principle
+- Trim only the supply/instructions the model actually consumes.
+- Do not blindly dismantle complex SOPs used by cloud models.
+- Provide summary versions of long docs for edge models.
 
-```
-只精简「该模型实际会接触的组件/供给内容」——
-  ✗ 不盲目拆全部组件本体（审计标记的高风险技能中，大部分是强模型专用，弱模型不碰）
-  ✓ 优先知识/指令供给侧精简：给弱模型高频检索的长文档配精简摘要版
-  ✓ 弱模型走 RAG 知识供给的，精简供给内容（精准 Top-K 片段），而非拆大模型复杂的 SOP
-```
+### ④ Counterfactual Verification
+- Periodically remove external skills to check if performance degrades.
+- Track deviations from injected constraints. Deviation > 10% triggers strict prompt reinforcement.
 
-### ④ 反事实抽查（防走捷径）
-
-- 定期抽检: 该任务的执行是否真遵循了外部注入的约束，还是凭模型内部先验"脑补"？
-- 方法: 提取规则硬约束，比对执行记录中的偏离；偏离率 >10% 触发加强前置检索与上下文硬注入。
-
-### ⑤ 动静分层
-
-- 通用行为直觉（强约束/系统级注入）vs 易变任务技能（外挂/随需 RAG 检索加载）分离管理。
-
-## 适用场景
-
-- 多模型并用的 Agent（本地小模型 + 云端大模型）；防止小模型被复杂组件拖垮，确保小模型在 RAG 支撑下稳定执行打标与结构化任务。
+### ⑤ Dynamic/Static Layering
+- General intuitions (internalized/system prompts) vs Volatile tasks (RAG-loaded external skills).
