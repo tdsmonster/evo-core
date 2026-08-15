@@ -13,7 +13,15 @@
 
 ## AI 可解析核心
 
-### ① AOT 依赖预检（调用前幂等自检）
+### ① 分层自愈与守护选型（个人端侧 vs 专业企业）
+
+| 维度 | 个人端侧 / EVO-Lite 推荐选型 | 专业企业级 / EVO-Pro 推荐选型 |
+|---|---|---|
+| **常驻守护** | **系统原生守护**：macOS `LaunchAgent` (KeepAlive) / Linux `systemd`，零额外资源常驻 | **容器云编排**：Kubernetes (K8s) Deployment 探针 (Liveness/Readiness) |
+| **自愈策略** | 本地 Python/Bash 看门狗定时探测，动态退避拉起 | K8s Pod 自动重建 + 多副本集群水平伸缩 (HPA) |
+| **依赖预检** | **AOT 脚本自检 (`skill_deps_check.py`)**：单机快速扫描 CLI、Python包、端口 | Dockerfile 多阶段构建镜像固化依赖 + 沙箱容器环境隔离 |
+
+### ② AOT 依赖预检（调用前幂等自检）
 
 对复杂能力（GUI 自动化/浏览器 CDP/文档解析等），执行前检查四类依赖：
 
