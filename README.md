@@ -81,13 +81,13 @@ cd evo-core
 
 **Quick Match Guide (30 Seconds)**:
 
-| Your Target Environment | Recommended Module Combination |
-|---|---|
-| Edge Device $\le$ 8GB RAM / Raspberry Pi / Free Cloud Containers | **M1 (Failure Loop) + M6 (Self-Healing)** |
-| Edge Workstation 16GB ~ 32GB Unified Memory / Entry-level GPU | **M1 + M2 + M3 + M6 (+ M4 Optional)** |
-| High-Spec Server $\ge$ 64GB RAM / Dedicated Workstations | **Full M1 through M6** |
-| Production / Cloud Enterprise | Planned in EVO-Pro (Includes Parametric Distillation) |
-| Multi-User Teams / Studios | Planned in EVO-Team (Includes Skill Sharing) |
+| **Your Target Environment** | **Recommended Module Combination** | **Core Rationale & Dataflow** |
+|---|---|---|
+| Edge Device $\le$ 8GB RAM / Raspberry Pi / Free Cloud Containers | **M1 (Failure Loop) + M6 (Self-Healing)** | Rule engine + state logging + auto-healing. No local model needed. |
+| Edge Workstation 16GB ~ 32GB Unified Memory / Entry GPU | **M1 + M2 + M3 + M5 + M6 (+ M4 Optional)** | **Crucial Loop**: M2 (RAG) feeds context to M5 (Small Model) for cheap tagging; M3 extracts SOPs; M6 guards daemons. |
+| High-Spec Server $\ge$ 64GB RAM / Dedicated Workstations | **Full M1 through M6** | Full offline autonomous evolution pipeline. |
+| Production / Cloud Enterprise | Planned in EVO-Pro | Includes Parametric Distillation & CI Gates |
+| Multi-User Teams / Studios | Planned in EVO-Team | Includes Multi-agent Skill Sharing & ACL |
 
 ---
 
