@@ -2,7 +2,7 @@
 
 > **约束驱动的 Agent 分层自进化架构** —— 底层核心框架（15 篇论文核心要素提炼）+ 理论模块库（可自由选配）+ 分层蓝图（推荐配置）。
 
-[English (Main)](./README.md) | [中文说明 (Chinese)](./README_CN.md)
+[English (Main)](README.md) | [中文说明 (Chinese)](README_CN.md)
 
 ---
 

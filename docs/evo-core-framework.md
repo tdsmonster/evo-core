@@ -3,7 +3,7 @@
 > **官方全称**: **EVO-CORE: An Observability-Driven, Multi-Tiered Self-Evolution Architecture for Autonomous Agents**
 > **定位**: 通用方法论地基（纯理论骨架，环境无关，不绑定任何具体硬件、用户或个人信息）
 > **用法**: 本框架是地基规范。上层具体蓝图（EVO-Lite / EVO-Pro / EVO-Team）基于本框架根据约束矩阵派生
-> **关联文献**: APO · TextGrad · PlugMem · SkillX · Trace2Skill · SkillClaw · SKILL0 · Skill0.5 · Skill1 · SkillForge · SkVM · Meta-Harness · AHE · Continual Harness · Task as Training
+> **关联文献**: APO · TextGrad · PlugMem · SkillX · Trace2Skill · Skill0.5 · SkillForge · SkVM · Meta-Harness · AHE · Continual Harness · Task as Training
 
 ---
 
@@ -106,7 +106,7 @@
 ## 二、底层框架的适用边界（重要）
 
 - ✅ **适用**: 走「冻结模型、进化外部状态」路线的任何 Agent 系统（端侧到云端皆可）。
-- ❌ **不适用**: 需要 RL 训练/参数内化/多卡算力的场景（那是 SKILL0/1 的「参数优化」分支，与外部状态进化是**不同技术路线**，不可混用）。
+- ❌ **不适用**: 需要 RL 训练/参数内化/多卡算力的场景（该方向属于「参数优化」路线，与本框架采用的「外部状态进化」属于不同技术路线，不可混用）。
 - ⚠️ **原则**: 硬约束变了，路线要重推——底层框架的「六个框架理论」通用，但「具体落地方案」必须按环境重写。
 
 ---

@@ -3,7 +3,7 @@
 > **A Constraint-Driven, Multi-Tiered Self-Evolution Architecture for Autonomous Agents**  
 > Core Framework (15 foundational papers synthesized) + Modular Theory Library (freely configurable) + Tiered Blueprints (recommended presets).
 
-[English (Main)](./README.md) | [中文说明 (Chinese)](./README_CN.md)
+[English (Main)](README.md) | [中文说明 (Chinese)](README_CN.md)
 
 ---
 
