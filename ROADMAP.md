@@ -4,7 +4,7 @@
 
 ### Released (Empirically Validated in Real-world / Edge Environments)
 - ✅ **EVO-CORE X Core Specification** `docs/evo-core-x-framework.md` (Four Autonomous Engines · Heterogeneous Compute Matrix · Zero-LLM Evidence Gates)
-- ✅ **Theory Modules Library** `theory-modules/` (M1-M6, each module = Paper Basis + AI-Parseable Core + Dependencies)
+- ✅ **Theory Modules Library** `theory-modules/` (M0-M10, each module = Paper Basis + AI-Parseable Core + Engine Mapping)
 - ✅ **EVO-Lite Blueprint** `docs/evo-tier-a-lite.md` (3-Tier compute recommended presets)
 - ✅ **3 Reference Implementation Templates** `templates/`
 

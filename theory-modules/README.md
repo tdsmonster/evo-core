@@ -1,27 +1,44 @@
-# Theory Modules Library
+# EVO-CORE X Modular Theory Library (M0 ~ M10)
 
-> **Positioning**: EVO-CORE's "Composable Component Library". The framework provides the skeleton; this library provides modularized theories based on specific papers.
-> **Usage**: Select modules based on 4D constraints (Compute/Cost/Scale/Reliability).
-> **Structure**: Source Paper → Core Claim → **AI-Parseable Core** (Rules/Formats/Metrics) → Dependencies.
+> **Architecture Core**: All modules serve as pluggable components mapped directly into the **EVO-CORE X Four-Engine Cognitive Architecture** (`docs/evo-core-x-framework.md`).
 
-## Module Index
+---
 
-| Module | Name | Source Papers | Dependencies | Core Capability |
-|---|---|---|---|---|
-| **M1** | Failure Closed-Loop | APO/ProTeGi + SkillForge | None | Failure logging, 4D attribution, recurrence monitoring |
-| **M2** | Memory & Retrieval | PlugMem | None | Hybrid RRF, health checks, small model context injection |
-| **M3** | Skill Lifecycle | SkillX + Trace2Skill | M1 | Stratification, bi-directional distillation, anti-overfitting |
-| **M4** | Observability & Rollback | AHE + Meta-Harness | M1 | File decoupling, regression gates, safe rollbacks |
-| **M5** | Capability-Awareness | Skill0.5 + Continual Harness | M2 | Floor effect, RAG-driven tagging, counterfactual verification |
-| **M6** | Environment Self-Healing| Continual Harness + SkVM | None | AOT preflight checks, backoff healing, daemons |
+## 📌 Complete Module Matrix (M0 ~ M10)
 
-## Quick Selection Guide
+| Module | Title | Primary EVO-CORE X Engine | Foundational Literature |
+|---|---|---|---|
+| **M0** | **[Evolution Governor](M0-evolution-governor.md)** | `Engine 4: Alignment Engine` | Continual Harness / Task as Training |
+| **M1** | **[Failure Closed-Loop](M1-failure-loop.md)** | `Engine 3: Evidence Engine` | APO / ProTeGi / SkillForge |
+| **M2** | **[Memory & Retrieval Hierarchy](M2-memory-retrieval.md)** | `Engine 2: Knowledge Engine` | PlugMem |
+| **M3** | **[Skill Lifecycle & Stratification](M3-skill-lifecycle.md)** | `Engine 2: Knowledge Engine` | SkillX / Trace2Skill |
+| **M4** | **[Observability & Safe Rollback](M4-observability-rollback.md)** | `Engine 3: Evidence Engine` | AHE / Meta-Harness |
+| **M5** | **[Capability Matching & Floor Effect](M5-capability-match.md)** | `Engine 4: Alignment Engine` | Skill0.5 / Continual Harness |
+| **M6** | **[Environment Self-Healing & Preflight](M6-self-healing.md)** | `Engine 1: World Model Engine`| Continual Harness / SkVM |
+| **M7** | **[Evidence & Provenance](M7-evidence-provenance.md)** | `Engine 3: Evidence Engine` | AHE / Meta-Harness |
+| **M8** | **[Counterfactual Evaluation](M8-counterfactual-eval.md)** | `Engine 3: Evidence Engine` | Skill0.5 / Task as Training |
+| **M9** | **[Compile-Time Knowledge Consolidation](M9-knowledge-consolidation.md)** | `Engine 2: Knowledge Engine` | Trace2Skill / PlugMem |
+| **M10**| **[Evolution Cost & Resource Controller](M10-cost-controller.md)** | `Engine 4: Alignment Engine` | Skill1 / APO |
 
-```text
-Compute-Constrained (≤8GB)  → M1 + M6 (Rule-based & healing only)
-Edge Hybrid (16-32GB)       → M1 + M2 + M3 + M5 + M6 (+M4 optional)
-Local Geek (≥64GB)          → M1-M6 (Full suite)
-Production (Cloud)          → M1-M6 + Parametric Internalization (M7)
-Multi-User (Team)           → M1-M6 + Experience Sharing (M8)
-```
-> Note: M7 and M8 remain theoretical and are solely tracked in the ROADMAP.
+---
+
+## 🛠️ Module Selection by Engine
+
+### 1. Engine 1 | World Model Engine (Environment & Topology)
+* **M6 (Self-Healing)**: Proactive environment probes, health daemons, and Ahead-Of-Time dependency validation.
+
+### 2. Engine 2 | Knowledge Engine (Hierarchical RAG & Rules)
+* **M2 (Memory Hierarchy)**: Context injection, propositional vs. prescriptive knowledge stratification.
+* **M3 (Skill Lifecycle)**: Skill state transitions (`draft` -> `candidate` -> `stable` -> `deprecated`).
+* **M9 (Knowledge Consolidation)**: Compile-time deduplication, 5-layer compression, and zero-drift conflict elimination.
+
+### 3. Engine 3 | Evidence Engine (Objective Machine Verification)
+* **M1 (Failure Loop)**: Textual gradient backpropagation, 4D root-cause attribution (`[Knowledge]/[Tool]/[Clarification]/[Style]`).
+* **M4 (Observability & Rollback)**: 3D Observability (Component/Experience/Decision) and regression gates.
+* **M7 (Evidence & Provenance)**: Verifiable knowledge lineage, failure-to-rule binding.
+* **M8 (Counterfactual Evaluation)**: Synthetic perturbations, sandbox ablation assertions.
+
+### 4. Engine 4 | Alignment Engine (Arbiter & Resource Governance)
+* **M0 (Evolution Governor)**: Centralized evolution lifecycle coordination and state machine transitions.
+* **M5 (Capability Matching)**: Tri-tier compute assignment, task difficulty routing.
+* **M10 (Cost Controller)**: Hard memory ceilings, token budgets, and ROI-driven mutation gates.

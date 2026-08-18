@@ -1,28 +1,44 @@
-# 理论模块库（Theory Modules）
+# EVO-CORE X 模块化理论库 (M0 ~ M10)
 
-> 定位: EVO-CORE 的「可组合零件库」——底层框架是骨架，本库是其余论文理论按主题模块化的选配件。
-> 用法: 按四维约束（算力/成本/规模/可靠性）选配模块；分层蓝图（EVO-Lite/Pro/Team）给出推荐组合，也可自由组合。
-> 每个模块结构: 来源论文 → 论文核心主张 → **AI 可解析核心**（判定规则/格式/统计口径/阈值）→ 依赖 → 适用场景。
+> **架构核心定位**: 本模块库是 **EVO-CORE X 四大自主认知引擎** (`docs/evo-core-x-framework_CN.md`) 的即插即用形式化零件库。
 
-## 模块索引
+---
 
-| 模块 | 名称 | 来源论文 | 依赖 | 核心能力 |
-|---|---|---|---|---|
-| **M1** | 失败闭环 | APO/ProTeGi + SkillForge | 无 | 失败记录/四维归因/复发率监控 |
-| **M2** | 记忆与检索 | PlugMem | 无 | 混合检索/健康检查/分层记忆/小模型知识供给 |
-| **M3** | 技能生命周期 | SkillX + Trace2Skill | M1 | 技能分层/双向沉淀/防过拟合 |
-| **M4** | 可观测与回滚 | AHE + Meta-Harness | M1 | 文件级解耦/回归门禁/备份回滚 |
-| **M5** | 能力感知 | Skill0.5 + Continual Harness | M2 | 模型分层/反事实抽查/能力地板/RAG驱动打标 |
-| **M6** | 环境自愈 | Continual Harness + SkVM | 无 | AOT依赖预检/看门狗自愈 |
+## 📌 完整模块矩阵 (M0 ~ M10)
 
-## 快速选配指引（完整推荐见各蓝图）
+| 模块编号 | 模块名称 | 归属 EVO-CORE X 引擎 | 基础文献与理论来源 |
+|---|---|---|---|
+| **M0** | **[进化总控与调度 (Governor)](M0-evolution-governor_CN.md)** | `引擎 4: 对齐引擎 (Alignment)` | Continual Harness / Task as Training |
+| **M1** | **[失败闭环与文本梯度 (Failure Loop)](M1-failure-loop_CN.md)** | `引擎 3: 证据引擎 (Evidence)` | APO / ProTeGi / SkillForge |
+| **M2** | **[分层记忆与检索优先 (Memory & RAG)](M2-memory-retrieval_CN.md)** | `引擎 2: 知识引擎 (Knowledge)` | PlugMem |
+| **M3** | **[技能生命周期管理 (Skill Lifecycle)](M3-skill-lifecycle_CN.md)** | `引擎 2: 知识引擎 (Knowledge)` | SkillX / Trace2Skill |
+| **M4** | **[可观测性治理与安全回滚 (Observability)](M4-observability-rollback_CN.md)** | `引擎 3: 证据引擎 (Evidence)` | AHE / Meta-Harness |
+| **M5** | **[能力感知与算力匹配 (Capability Match)](M5-capability-match_CN.md)** | `引擎 4: 对齐引擎 (Alignment)` | Skill0.5 / Continual Harness |
+| **M6** | **[环境自愈与 AOT 预检 (Self-Healing)](M6-self-healing_CN.md)** | `引擎 1: 世界模型 (World Model)`| Continual Harness / SkVM |
+| **M7** | **[证据链与技能溯源 (Evidence & Provenance)](M7-evidence-provenance_CN.md)** | `引擎 3: 证据引擎 (Evidence)` | AHE / Meta-Harness |
+| **M8** | **[反事实鲁棒性评估 (Counterfactual Eval)](M8-counterfactual-eval_CN.md)** | `引擎 3: 证据引擎 (Evidence)` | Skill0.5 / Task as Training |
+| **M9** | **[编译期经验压缩与冲突消灭 (Consolidation)](M9-knowledge-consolidation_CN.md)** | `引擎 2: 知识引擎 (Knowledge)` | Trace2Skill / PlugMem |
+| **M10**| **[进化成本与资源控制 (Cost Controller)](M10-cost-controller_CN.md)** | `引擎 4: 对齐引擎 (Alignment)` | Skill1 / APO |
 
-```
-算力受限(≤8GB)    → M1 + M6（零本地模型，纯规则与自愈）
-端侧混合(16-32GB) → M1 + M2 + M3 + M5 + M6（+M4可选，RAG驱动小模型打标+技能闭环）
-本地极客(≥64GB)   → M1-M6 全选（全栈本地托管与全自进化）
-生产级(云端)      → M1-M6 + 参数内化(M7, 算力门槛)
-多用户(团队)      → M1-M6 + 经验共享(M8, 待验证)
-```
+---
 
-> 注: M7(参数内化/SKILL0-1) 与 M8(多用户生态/SkillClaw) 为理论推演、未实战验证，暂不入库，仅在路线图标注。
+## 🛠️ 按四大核心引擎映射选配
+
+### 1. 引擎 1 | 世界模型引擎 (World Model Engine)
+* **M6 (环境自愈)**：主动状态探针、健康守护进程与 AOT 依赖运行前预检。
+
+### 2. 引擎 2 | 知识引擎 (Knowledge Engine)
+* **M2 (分层记忆)**：确定性上下文前置注入，陈述性知识 vs 程序性知识解耦。
+* **M3 (技能生命周期)**：Skill 状态机迁移 (`draft` -> `candidate` -> `stable` -> `deprecated`)。
+* **M9 (经验压缩与消歧)**：编译期去重合并，5 级漏斗提炼，彻底消灭运行时规则漂移。
+
+### 3. 引擎 3 | 证据引擎 (Evidence Engine)
+* **M1 (失败闭环)**：文本梯度反向传播，4D 归因分类 (`[Knowledge]/[Tool]/[Clarification]/[Style]`)。
+* **M4 (可观测与回滚)**：三维可观测性（组件/经历/决策）与自动化回归门禁。
+* **M7 (证据与溯源)**：不可篡改知识血统，强制绑定真实失败样本与测试记录。
+* **M8 (反事实评估)**：边界扰动测试，隔离沙箱消融断言。
+
+### 4. 引擎 4 | 对齐引擎 (Alignment Engine)
+* **M0 (进化总控)**：演进生命周期统一状态机协调与调度。
+* **M5 (能力感知匹配)**：三层异构算力分流与任务难度路由。
+* **M10 (成本与资源控制)**：内存硬上限约束、Token 额度预算与 ROI 演进门禁。

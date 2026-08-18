@@ -21,9 +21,10 @@ Instead of relying on monolithic prompt loops or unconstrained tool calls, EVO-C
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │
 ┌───────────────────────────────────▼────────────────────────────────────┐
-│ ② Modular Theory Library (theory-modules/ M1-M6) ★ Configurable        │
-│    M1: Failure Loop · M2: Memory/RAG · M3: Skill Lifecycle             │
-│    M4: Observability · M5: Capability Match · M6: Self-Healing Checks  │
+│ ② Modular Theory Library (theory-modules/ M0-M10) ★ Configurable       │
+│    M0: Governor · M1: Failure Loop · M2: Memory/RAG · M3: Skill Life   │
+│    M4: Observability · M5: Capability · M6: Self-Healing · M7: Provenance
+│    M8: Counterfactual · M9: Consolidation · M10: Cost Controller       │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │
 ┌───────────────────────────────────▼────────────────────────────────────┐
