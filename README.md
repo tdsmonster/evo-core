@@ -1,36 +1,46 @@
-# EVO-CORE · Architecture Specification for Agent Self-Evolution
+# EVO-CORE · Architecture Specification for Agent Self-Evolution & Execution
 
-> **A Constraint-Driven, Multi-Tiered Self-Evolution Architecture for Autonomous Agents**  
-> Core Framework (15 foundational papers synthesized) + Modular Theory Library (freely configurable) + Tiered Blueprints (recommended presets).
+> **A Constraint-Driven, Multi-Tiered Self-Evolution & Evidence Architecture for Autonomous Agents**  
+> Core Frameworks (v1.0 Classical & v2.0 EVO-CORE X Next-Gen) + Modular Theory Library (M1-M6) + Tiered Blueprints.
 
 [English (Main)](README.md) | [中文说明 (Chinese)](README_CN.md)
 
 ---
 
-## 📌 What is EVO-CORE?
+## ⚡ What's New: EVO-CORE X (v2.0) Architecture Release
 
-EVO-CORE is a formal methodology and engineering specification that guides **how an AI Agent autonomously evolves over time without fine-tuning model weights**. It follows a clear three-tier architecture:
+We are proud to introduce **EVO-CORE X**, a major generational paradigm shift from single-agent prompt mutation to a **Decentralized Four-Engine Cognitive Architecture** with **Heterogeneous Compute Scheduling** and **Machine-Verifiable Evidence Gates (0 LLM Cost)**:
+
+* 📖 **Read the Full Specification**: [`docs/evo-core-x-framework.md`](docs/evo-core-x-framework.md) ([中文版](docs/evo-core-x-framework_CN.md))
+* 🧠 **Four Autonomous Cognitive Engines**: *World Model Engine*, *Knowledge Engine*, *Evidence Engine*, and *Alignment Engine*.
+* 🚀 **Heterogeneous Compute Scheduling**: Cloud Frontier Arbiter + Edge Offline Distiller + High-Throughput Stateless Worker Pool.
+* 🛡️ **Zero-Leakage Ephemeral Sandboxes**: JIT worker generation with deterministic `unittest` verification and zero runtime memory retention.
+
+---
+
+## 📌 Architecture Overview
 
 ```
-┌──────────────────────────────────────────────────────────┐
-│ ① Core Framework (docs/evo-core-framework.md)            │
-│    Theoretical foundation synthesized from 15 papers.    │
-│    6 Core Theories + 4D Constraint Matrix (Compute/Cost/ │
-│    Scale/Reliability). Environment-agnostic.             │
-└───────────────────────┬──────────────────────────────────┘
-                        │
-┌───────────────────────▼──────────────────────────────────┐
-│ ② Theory Modules (theory-modules/ M1-M6) ★ Configurable  │
-│    Modularized agent evolution components. Each module:  │
-│    Paper Basis + AI-Parseable Core (Rules/Formats/Gates) │
-└───────────────────────┬──────────────────────────────────┘
-                        │ Blueprints provide recommended presets
-┌───────────────────────▼──────────────────────────────────┐
-│ ③ Tiered Blueprints (Recommended Presets)                │
-│    EVO-Lite → 3-tier compute presets for solo developers │
-│               ★ Validated in real-world environments     │
-│    EVO-Pro / EVO-Team → Theory-stage only (See ROADMAP)  │
-└──────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────┐
+│ ① EVO-CORE X Core Specification (docs/evo-core-x-framework.md)         │
+│    Four Decentralized Engines · Heterogeneous Compute · Evidence Gates │
+├────────────────────────────────────────────────────────────────────────┤
+│ ② Classic Core Framework (docs/evo-core-framework.md)                  │
+│    Theoretical foundation synthesized from 15 academic papers.        │
+│    6 Core Theories + 4D Constraint Matrix (Compute/Cost/Scale/Reliab.) │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+┌───────────────────────────────────▼────────────────────────────────────┐
+│ ③ Modular Theory Library (theory-modules/ M1-M6) ★ Configurable        │
+│    M1: Failure Loop · M2: Memory/RAG · M3: Skill Lifecycle             │
+│    M4: Observability · M5: Capability Match · M6: Self-Healing Checks  │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+┌───────────────────────────────────▼────────────────────────────────────┐
+│ ④ Tiered Blueprints (Recommended Presets)                              │
+│    EVO-Lite  → 3-tier compute presets for solo developers (Validated)  │
+│    EVO-Pro / EVO-Team → Theory-stage only (See ROADMAP)                │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -39,23 +49,26 @@ EVO-CORE is a formal methodology and engineering specification that guides **how
 
 ```
 evo-core/
-├── README.md               # Chinese Main Overview
-├── README_EN.md            # English Main Overview
+├── README.md               # English Main Overview
+├── README_CN.md            # Chinese Main Overview
 ├── LICENSE                 # MIT License
-├── REFERENCES.md           # Citations & contributions of 15 papers
+├── REFERENCES.md           # Citations & contributions of 15 foundational papers
 ├── ROADMAP.md              # Milestones & unreleased modules
 ├── docs/
-│   ├── evo-core-framework.md   # Base Framework (6 Theories + Constraint Matrix)
-│   └── evo-tier-a-lite.md      # EVO-Lite Blueprint (3-tier compute presets)
-├── theory-modules/              # ★ Modular Theory Library
-│   ├── README.md                # Module index & selection guide
-│   ├── M1-failure-loop.md       # Closed-loop failure analysis (APO + SkillForge)
-│   ├── M2-memory-retrieval.md   # Memory & retrieval priority (PlugMem)
-│   ├── M3-skill-lifecycle.md    # Skill lifecycle & anti-overfitting (SkillX + Trace2Skill)
+│   ├── evo-core-x-framework.md    # ★ EVO-CORE X Next-Gen Specification (v2.0)
+│   ├── evo-core-x-framework_CN.md # ★ EVO-CORE X 次世代架构规范 (中文版)
+│   ├── evo-core-framework.md      # Base Classic Framework (v1.0)
+│   ├── evo-core-framework_CN.md   # 底层经典核心框架 (中文版)
+│   └── evo-tier-a-lite.md         # EVO-Lite Blueprint (3-tier compute presets)
+├── theory-modules/                # ★ Modular Theory Library
+│   ├── README.md                  # Module index & selection guide
+│   ├── M1-failure-loop.md         # Closed-loop failure analysis (APO + SkillForge)
+│   ├── M2-memory-retrieval.md     # Memory & retrieval priority (PlugMem)
+│   ├── M3-skill-lifecycle.md      # Skill lifecycle & anti-overfitting (SkillX + Trace2Skill)
 │   ├── M4-observability-rollback.md # Observability & CI regression (AHE + Meta-Harness)
-│   ├── M5-capability-match.md   # Capability matching & floor effect (Skill0.5 + Continual Harness)
-│   └── M6-self-healing.md       # Environment self-healing & AOT checks (Continual Harness + SkVM)
-└── templates/                  # Reference implementation templates (Sanitized)
+│   ├── M5-capability-match.md     # Capability matching & floor effect (Skill0.5)
+│   └── M6-self-healing.md         # Environment self-healing & AOT checks (SkVM)
+└── templates/                    # Reference implementation templates (Sanitized)
     ├── failure_closed_loop_template.py # Failure parsing & 4D taxonomy
     ├── regression_gate_template.sh     # Full-stack automated regression gate
     └── aot_deps_check_template.py      # Ahead-Of-Time dependency preflight check
@@ -67,10 +80,11 @@ evo-core/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-username>/evo-core.git
+git clone https://github.com/tdsmonster/evo-core.git
 cd evo-core
 
-# 2. Identify your constraints using the 4D Matrix
+# 2. Explore the EVO-CORE X Paradigm & 4D Matrix
+#    → docs/evo-core-x-framework.md (Four-Engine Execution)
 #    → docs/evo-core-framework.md (§0 Decision Matrix)
 
 # 3. Select modules and apply reference templates
@@ -79,27 +93,11 @@ cd evo-core
 #    → templates/ (Adaptable code skeletons)
 ```
 
-**Quick Match Guide (30 Seconds)**:
-
-| **Your Target Environment** | **Recommended Module Combination** | **Core Rationale & Dataflow** |
-|---|---|---|
-| Edge Device $\le$ 8GB RAM / Raspberry Pi / Free Cloud Containers | **M1 (Failure Loop) + M6 (Self-Healing)** | Rule engine + state logging + auto-healing. No local model needed. |
-| Edge Workstation 16GB ~ 32GB Unified Memory / Entry GPU | **M1 + M2 + M3 + M5 + M6 (+ M4 Optional)** | **Crucial Loop**: M2 (RAG) feeds context to M5 (Small Model) for cheap tagging; M3 extracts SOPs; M6 guards daemons. |
-| High-Spec Server $\ge$ 64GB RAM / Dedicated Workstations | **Full M1 through M6** | Full offline autonomous evolution pipeline. |
-| Production / Cloud Enterprise | Planned in EVO-Pro | Includes Parametric Distillation & CI Gates |
-| Multi-User Teams / Studios | Planned in EVO-Team | Includes Multi-agent Skill Sharing & ACL |
-
 ---
 
 ## 🧠 Core Design Principles
 
-1. **Constraint-Driven, Not Persona-Driven**: System designs are determined by four objective boundaries (*Compute, Cost, Scale, Reliability*), not arbitrary human labels.
-2. **Skeleton & Modules Separation**: The base framework provides an unchangeable theoretical skeleton; theory modules serve as pluggable components.
-3. **Release Only What Is Validated**: Theoretical models without empirical validation remain in the ROADMAP and are excluded from the core release.
-4. **AI-Parseable Precision**: Every module provides exact data structures, parsing rules, and threshold metrics so that AI agents can execute them without ambiguous prompt interpretation.
-
----
-
-## 📜 License
-
-Distributed under the [MIT License](LICENSE). Free for academic, personal, and commercial use.
+1. **Evidence-Driven over Persona-Driven**: System designs are determined by objective constraints and non-fungible machine assertions, not arbitrary human self-reports.
+2. **Skeleton & Component Separation**: The base architecture provides an unchangeable theoretical skeleton; theory modules and execution pools serve as pluggable components.
+3. **Zero-Leakage Sandboxing**: High-throughput execution is strictly bounded within ephemeral environments and destroyed immediately upon verification.
+4. **AI-Parseable Precision**: Every module provides exact data structures, parsing rules, and threshold metrics so that AI agents can execute them deterministically.
