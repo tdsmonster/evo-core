@@ -1,42 +1,33 @@
-# EVO-CORE · 智能体自进化与机器证据架构规范
+# EVO-CORE X · 自主认知与机器证据架构规范 (v2.0)
 
-> **面向自主智能体的约束驱动、多级自进化与客观证据架构**  
-> 核心框架（v1.0 经典理论 + v2.0 EVO-CORE X 次世代规范）+ 模块化理论库 (M1-M6) + 分级实施蓝图。
+> **面向自主智能体的约束驱动、四大认知引擎与客观证据架构**  
+> 核心框架（四大解耦自主认知引擎 + 异构算力协作矩阵 + 零 LLM 消耗机器证据门禁）+ 模块化理论库 (M1-M6) + 分级实施蓝图。
 
 [English (Main)](README.md) | [中文说明 (Chinese)](README_CN.md)
 
 ---
 
-## ⚡ 重磅发布: EVO-CORE X (v2.0) 架构规范
+## 📌 什么是 EVO-CORE X？
 
-我们正式推出 **EVO-CORE X** 次世代架构规范。它标志着从“单体 Agent 提示词与记忆自迭代”向**「四大自主认知引擎解耦架构」**、**「三层异构算力协作矩阵」**与**「零 LLM 成本客观机器证据硬验收门禁」**的重大范式跃迁：
+**EVO-CORE X** 是一套面向次世代自主智能体（AI Agent）的通用架构规范，旨在通过**非参数化持续进化、异构算力混合调度与客观机器证据验收**，从根本上解决大模型 Agent 幻觉失控、内存泄漏与执行不可靠的难题。
 
-* 📖 **完整架构规范文档**: [`docs/evo-core-x-framework_CN.md`](docs/evo-core-x-framework_CN.md) ([English](docs/evo-core-x-framework.md))
-* 🧠 **四大解耦自主认知引擎**: **世界模型引擎 (World Model)**、**知识引擎 (Knowledge)**、**证据引擎 (Evidence)**、**对齐引擎 (Alignment)**。
-* 🚀 **三层异构算力协同**: 云端高阶决策裁判 (Arbiter) + 边缘私有离线提炼 (Distiller) + 高吞吐无状态工兵集群 (Worker)。
-* 🛡️ **短生命周期零泄漏沙箱**: 工兵代码生成限定于隔离沙箱内，通过确定性 `unittest` 机器验收后立即销毁，保障 0 进程与内存泄漏。
-
----
-
-## 📌 架构全景图
+系统彻底摒弃了单体 Prompt 堆砌的脆弱模式，确立了严格的**四大解耦自主认知引擎架构**：
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│ ① EVO-CORE X 次世代架构规范 (docs/evo-core-x-framework_CN.md)          │
-│    四大自主引擎 · 异构算力调度矩阵 · 零 LLM 消耗机器证据门禁            │
-├────────────────────────────────────────────────────────────────────────┤
-│ ② 经典底层核心框架 (docs/evo-core-framework_CN.md)                     │
-│    15 篇顶级前沿学术论文提炼；6 大核心理论 + 4D 约束决策矩阵            │
+│ ① EVO-CORE X 核心架构规范 (docs/evo-core-x-framework_CN.md)             │
+│    世界模型引擎 · 知识引擎 · 证据引擎 · 对齐引擎                          │
+│    三层异构算力矩阵 (决策裁判 / 离线提炼 / 高吞吐工兵)                   │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │
 ┌───────────────────────────────────▼────────────────────────────────────┐
-│ ③ 模块化理论库 (theory-modules/ M1-M6) ★ 自由选配                      │
+│ ② 模块化理论库 (theory-modules/ M1-M6) ★ 自由选配                      │
 │    M1: 失败闭环 · M2: 记忆检索 · M3: 技能生命周期                      │
 │    M4: 可观测与回滚 · M5: 能力感知匹配 · M6: 环境自愈与 AOT 检查        │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │
 ┌───────────────────────────────────▼────────────────────────────────────┐
-│ ④ 分级实施蓝图 (推荐预设)                                              │
+│ ③ 分级实施蓝图 (推荐预设)                                              │
 │    EVO-Lite  → 个人开发者 3 档算力推荐预设 (已实战严苛验证)            │
 │    EVO-Pro / EVO-Team → 理论推演阶段 (详见 ROADMAP)                    │
 └────────────────────────────────────────────────────────────────────────┘
@@ -55,9 +46,7 @@ evo-core/
 ├── ROADMAP.md              # 路线图与演进规划
 ├── docs/
 │   ├── evo-core-x-framework_CN.md # ★ EVO-CORE X 次世代架构规范 (中文版)
-│   ├── evo-core-x-framework.md    # ★ EVO-CORE X Next-Gen Specification (English)
-│   ├── evo-core-framework_CN.md   # 底层经典核心框架 (中文版)
-│   ├── evo-core-framework.md      # Base Classic Framework (English)
+│   ├── evo-core-x-framework.md    # ★ EVO-CORE X Architecture Specification (English)
 │   └── evo-tier-a-lite_CN.md      # EVO-Lite 实施蓝图 (3 档算力预设)
 ├── theory-modules/                # ★ 模块化理论库 (AI-Parseable 形式化规范)
 │   ├── README_CN.md               # 模块索引与选配指南
@@ -82,9 +71,8 @@ evo-core/
 git clone https://github.com/tdsmonster/evo-core.git
 cd evo-core
 
-# 2. 查阅 EVO-CORE X 范式与 4D 约束矩阵
-#    → docs/evo-core-x-framework_CN.md (四大引擎执行体系)
-#    → docs/evo-core-framework_CN.md (§0 决策矩阵)
+# 2. 查阅 EVO-CORE X 架构规范文档
+#    → docs/evo-core-x-framework_CN.md (四大引擎与证据门禁流水线)
 
 # 3. 按需选配模块并应用工程模板
 #    → docs/evo-tier-a-lite_CN.md (根据硬件档位选择预设)

@@ -1,6 +1,6 @@
 # EVO-Tier A | EVO-Lite (Solo Developer Blueprint v1.0)
 
-> **Hierarchy**: Based on `evo-core-framework.md` (Skeleton) + `theory-modules/` (Component Library)
+> **Hierarchy**: Based on `docs/evo-core-x-framework.md` (Skeleton) + `theory-modules/` (Component Library)
 > **Constraint Targeting**: Compute = Edge/Constrained · Cost = Zero/Low · Scale = Solo · Reliability = Personal Tolerance
 > **Positioning**: This blueprint serves as a **recommended preset**, not a strict mandate.
 

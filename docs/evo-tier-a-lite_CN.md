@@ -1,6 +1,6 @@
 # EVO-Tier A｜EVO-Lite（个人开发者蓝图 v1.0）
 
-> **归属体系**: 基于 `evo-core-framework_CN.md`（骨架）+ `theory-modules/`（零件库）
+> **归属体系**: 基于 `docs/evo-core-x-framework_CN.md`（骨架）+ `theory-modules/`（零件库）
 > **约束定位**: 算力=端侧/受限单机 · 成本=零~低预算 · 规模=单用户 · 可靠性=个人容忍
 > **定位**: 本蓝图是**推荐配置**，不是强制方案——按你的算力档位选配理论模块，也可自由组合。
 
