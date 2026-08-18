@@ -2,7 +2,7 @@
 """
 aot_deps_check_template.py — 技能 AOT (Ahead-Of-Time) 环境依赖预检模板
 ======================================================================
-来源: EVO-CORE 理论模块 M6（环境自愈）
+来源: EVO-CORE X 架构规范 · 世界模型 (Engine 1: World Model) / M6 模块
 理论依据: SkVM (arXiv:2604.03088v3) AOT 依赖绑定原则
 
 作用: 在调用特定复杂技能/工具前，自动进行幂等依赖自检（CLI命令、Python包、后台端口、环境变量），

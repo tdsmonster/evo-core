@@ -2,7 +2,7 @@
 """
 failure_closed_loop_template.py — 失败闭环解析/诊断模板
 =====================================================
-来源: EVO-CORE 框架1（反馈闭环引擎）· 框架5（可观测治理与安全回滚）
+来源: EVO-CORE X 架构规范 · 证据引擎 (Engine 3: Evidence Engine) / M1 模块
 理论依据: APO/ProTeGi 文本梯度 · SkillForge 四维失败归因 · AHE 可观测性
 
 作用: 解析结构化失败日志 → 严格字段校验 → 复发率统计 → 四维失败分类。

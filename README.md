@@ -58,9 +58,10 @@ evo-core/
 │   ├── M5-capability-match.md     # Capability matching & floor effect (Skill0.5)
 │   └── M6-self-healing.md         # Environment self-healing & AOT checks (SkVM)
 └── templates/                    # Reference implementation templates (Sanitized)
-    ├── failure_closed_loop_template.py # Failure parsing & 4D taxonomy
-    ├── regression_gate_template.sh     # Full-stack automated regression gate
-    └── aot_deps_check_template.py      # Ahead-Of-Time dependency preflight check
+    ├── evidence_sandbox_runner_template.py # ★ EVO-CORE X Ephemeral sandbox & unit test gate
+    ├── failure_closed_loop_template.py    # Failure parsing & 4D taxonomy
+    ├── regression_gate_template.sh        # Full-stack automated regression gate
+    └── aot_deps_check_template.py         # Ahead-Of-Time dependency preflight check
 ```
 
 ---

@@ -6,7 +6,7 @@
 - ✅ **EVO-CORE X Core Specification** `docs/evo-core-x-framework.md` (Four Autonomous Engines · Heterogeneous Compute Matrix · Zero-LLM Evidence Gates)
 - ✅ **Theory Modules Library** `theory-modules/` (M0-M10, each module = Paper Basis + AI-Parseable Core + Engine Mapping)
 - ✅ **EVO-Lite Blueprint** `docs/evo-tier-a-lite.md` (3-Tier compute recommended presets)
-- ✅ **3 Reference Implementation Templates** `templates/`
+- ✅ **4 Reference Implementation Templates** `templates/` (Including `evidence_sandbox_runner_template.py`)
 
 ### Unreleased (Theoretical Deduction, Pending Empirical Validation)
 - ⏳ **EVO-Pro** (Professional Developer Preset): Enterprise-grade multi-agent arbitration / CI regression / Parametric Internalization (M7) — **Theory Stage**

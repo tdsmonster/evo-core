@@ -58,9 +58,10 @@ evo-core/
 │   ├── M5-capability-match_CN.md  # 能力感知匹配与底线效应 (Skill0.5)
 │   └── M6-self-healing_CN.md      # 环境自愈与 AOT 预检 (SkVM)
 └── templates/                    # 参考实现模板 (已脱敏通用代码)
-    ├── failure_closed_loop_template.py # 失败归因解析器与 4D 分类法
-    ├── regression_gate_template.sh     # 全栈自动化回归门禁脚本
-    └── aot_deps_check_template.py      # AOT 运行前依赖预检脚手架
+    ├── evidence_sandbox_runner_template.py # ★ EVO-CORE X 隔离沙箱与机器单测硬验收模板
+    ├── failure_closed_loop_template.py    # 失败归因解析器与 4D 分类法
+    ├── regression_gate_template.sh        # 全栈自动化回归门禁脚本
+    └── aot_deps_check_template.py         # AOT 运行前依赖预检脚手架
 ```
 
 ---
